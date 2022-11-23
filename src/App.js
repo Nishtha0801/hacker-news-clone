@@ -6,12 +6,14 @@ import axios from "axios";
 import styled from "styled-components";
 import { useState } from "react";
 import { useEffect } from "react";
+import SortingBox from "./components/Story/SortingBox";
 
 export const ButtonWrapper = styled.div`
   padding: 0px 30px 10px;
 `;
 
 export function getSinglePage(page_number, m) {
+  const urlKey = "newstories";
   return new Promise((resolve) => {
     axios
       .get(`https://hn.algolia.com/api/v1/search?page=${page_number}`)
@@ -41,11 +43,12 @@ export function getSinglePage(page_number, m) {
 const App = () => {
   const [curStories, setCurStories] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+  const [totalStories, setTotalStories] = useState(0);
   const [m, setM] = useState(0);
 
   const getStories = async (page_number) => {
     let results = await getSinglePage(page_number, m);
-
+    console.log(results, " Here is Results");
     setCurStories(results);
     setM(m + results.length);
   };
@@ -82,6 +85,62 @@ const App = () => {
   useEffect(() => {
     getStories(pageNumber);
   }, [pageNumber]);
+
+  useEffect(() => {}, [totalStories]);
+
+  // Show only 1)  Last 24 hrs 2) Past Week 3) Past Month 4) Past Year 5) All Time
+
+  const showLast24Hrs = () => {
+    let data_here = curStories;
+    let final_data = [];
+    let i = 0;
+    for (let row of data_here) {
+      let date = new Date(row.created_at);
+      let cur_date = new Date();
+      let diff = cur_date.getTime() - date.getTime();
+      let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+      if (diffDays <= 1) {
+        final_data.push(row);
+        i++;
+      }
+    }
+    setCurStories(final_data);
+  };
+
+  const showPastWeek = () => {
+    let data_here = curStories;
+    let final_data = [];
+    let i = 0;
+    for (let row of data_here) {
+      let date = new Date(row.created_at);
+      let cur_date = new Date();
+      let diff = cur_date.getTime() - date.getTime();
+      let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+      if (diffDays <= 7) {
+        final_data.push(row);
+        i++;
+      }
+    }
+    setCurStories(final_data);
+  };
+
+  const showPastYear = () => {
+    let data_here = curStories;
+    let final_data = [];
+    let i = 0;
+    for (let row of data_here) {
+      let date = new Date(row.created_at);
+      let cur_date = new Date();
+      let diff = cur_date.getTime() - date.getTime();
+      let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+      if (diffDays <= 365) {
+        final_data.push(row);
+        i++;
+      }
+    }
+    setCurStories(final_data);
+  };
+
   return (
     <div>
       <link
@@ -107,6 +166,7 @@ const App = () => {
         crossorigin="anonymous"
       ></script>
       <MenuBar />
+      <SortingBox/>
       <Feed items={curStories} hideData={hideData} upVote={upVote} />
 
       {/* Pagination */}
@@ -119,26 +179,41 @@ const App = () => {
         }}
       >
         <nav aria-label="Page navigation example">
-          <ul class="pagination">
+          <ul className="pagination">
+            {/* showLast24Hrs */}
+            <a
+              className="page-link"
+              href="#"
+              style={
+                {
+                  // color: pageNumber > 1?"black":"darkgrey",
+                }
+              }
+              onClick={() => {
+                showPastYear();
+              }}
+            >
+              Sort
+            </a>
             <li
-              class={`page-item ${pageNumber === 1 ? "disabled" : ""}`}
+              className={`page-item ${pageNumber === 1 ? "disabled" : ""}`}
               onClick={() => {
                 if (pageNumber > 1) setPageNumber(pageNumber - 1);
               }}
             >
               <a
-                class="page-link"
+                className="page-link"
                 href="#"
                 style={{
-                  color: pageNumber > 1?"black":"darkgrey",
+                  color: pageNumber > 1 ? "black" : "darkgrey",
                 }}
               >
                 Previous
               </a>
             </li>
-            <li class="page-item">
+            <li className="page-item">
               <a
-                class="page-link"
+                className="page-link"
                 href="#"
                 style={{
                   color: "black",
@@ -148,13 +223,13 @@ const App = () => {
               </a>
             </li>
             <li
-              class="page-item"
+              className="page-item"
               onClick={() => {
                 setPageNumber(pageNumber + 1);
               }}
             >
               <a
-                class="page-link"
+                className="page-link"
                 href="#"
                 style={{
                   color: "black",
@@ -164,13 +239,13 @@ const App = () => {
               </a>
             </li>
             <li
-              class="page-item"
+              className="page-item"
               onClick={() => {
                 setPageNumber(pageNumber + 2);
               }}
             >
               <a
-                class="page-link"
+                className="page-link"
                 href="#"
                 style={{
                   color: "black",
@@ -180,13 +255,13 @@ const App = () => {
               </a>
             </li>
             <li
-              class="page-item"
+              className="page-item"
               onClick={() => {
                 setPageNumber(pageNumber + 1);
               }}
             >
               <a
-                class="page-link "
+                className="page-link "
                 style={{
                   color: "black",
                 }}
