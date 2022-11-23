@@ -25,44 +25,89 @@ const Logo = styled(MenuUrlStyle)`
 const MainNavClass = styled.div`
   background-color: rgb(255, 102, 0);
   overflow: hidden;
+  display: flex;
+  align-items: center;
 `;
 const MOptions = styled(MenuUrlStyle)`
   float: left;
   color: #030303;
 `;
 
-class MenuBar extends Component {
-  state = {
-    isMenuHidden: true,
-  };
+// class MenuBar extends Component {
+//   state = {
+//     isMenuHidden: true,
+//   };
 
-  onToggleMenu = () => {
-    this.setState((prevState, props) => {
-      return { isMenuHidden: !prevState.isMenuHidden };
-    });
-  };
+//   onToggleMenu = () => {
+//     this.setState((prevState, props) => {
+//       return { isMenuHidden: !prevState.isMenuHidden };
+//     });
+//   };
 
-  render() {
-    return (
-      <MainNavClass>
-        <Logo href="/">
-          <img src="https://news.ycombinator.com/y18.gif" alt="logo" style={{
+//   render() {
+//     return (
+//       <MainNavClass>
+//         <Logo href="/">
+//           <img
+//             src="https://news.ycombinator.com/y18.gif"
+//             alt="logo"
+//             style={{
+//               border: "1px solid white",
+//               marginRight: "5px",
+//             }}
+//           />
+//           Hacker News
+//         </Logo>
+
+//         <MOptions href="#">new |</MOptions>
+//         <MOptions href="#">past |</MOptions>
+//         <MOptions href="#">comments |</MOptions>
+//         <MOptions href="#">ask |</MOptions>
+//         <MOptions href="#">show |</MOptions>
+//         <MOptions href="#">job |</MOptions>
+//         <MOptions href="#">submit</MOptions>
+//         {/* Search Button */}
+//         <button className="btn my-2" onClick={()=>{
+
+//         }}>Search</button>
+//       </MainNavClass>
+//     );
+//   }
+// }
+
+const MenuBar = ({ setIsSearch }) => {
+  return (
+    <MainNavClass>
+      <Logo href="/">
+        <img
+          src="https://news.ycombinator.com/y18.gif"
+          alt="logo"
+          style={{
             border: "1px solid white",
             marginRight: "5px",
-          }}  />
-          Hacker News
-        </Logo>
+          }}
+        />
+        Hacker News
+      </Logo>
 
-        <MOptions href="#">new |</MOptions>
-        <MOptions href="#">past |</MOptions>
-        <MOptions href="#">comments |</MOptions>
-        <MOptions href="#">ask |</MOptions>
-        <MOptions href="#">show |</MOptions>
-        <MOptions href="#">job |</MOptions>
-        <MOptions href="#">submit</MOptions>
-      </MainNavClass>
-    );
-  }
-}
+      <MOptions href="#">new |</MOptions>
+      <MOptions href="#">past |</MOptions>
+      <MOptions href="#">comments |</MOptions>
+      <MOptions href="#">ask |</MOptions>
+      <MOptions href="#">show |</MOptions>
+      <MOptions href="#">job |</MOptions>
+      <MOptions href="#">submit</MOptions>
+      {/* Search Button */}
+      <button
+        className="btn my-2"
+        onClick={() => {
+          setIsSearch(true);
+        }}
+      >
+        Search
+      </button>
+    </MainNavClass>
+  );
+};
 
 export default MenuBar;

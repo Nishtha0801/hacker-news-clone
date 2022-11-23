@@ -29,10 +29,14 @@ export default function Header(props) {
               props.upVote(props.Id);
             }}
           >
-            <img src="https://news.ycombinator.com/grayarrow.gif" alt="" style={{
-              width: "10px",
-              height: "10px",
-            }} />
+            <img
+              src="https://news.ycombinator.com/grayarrow.gif"
+              alt=""
+              style={{
+                width: "10px",
+                height: "10px",
+              }}
+            />
           </HrefClass>
         </UrlClass>
       </RankClass>

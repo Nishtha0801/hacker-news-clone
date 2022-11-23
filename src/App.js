@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useEffect } from "react";
 import SortingBox from "./components/Story/SortingBox";
+import SearchPage from "./components/SearchBar/SearchPage";
 
 export const ButtonWrapper = styled.div`
   padding: 0px 30px 10px;
@@ -45,6 +46,7 @@ const App = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [totalStories, setTotalStories] = useState(0);
   const [m, setM] = useState(0);
+  const [isSearch, setIsSearch] = useState(false);
 
   const getStories = async (page_number) => {
     let results = await getSinglePage(page_number, m);
@@ -165,114 +167,47 @@ const App = () => {
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"
       ></script>
-      <MenuBar />
-      <SortingBox/>
-      <Feed items={curStories} hideData={hideData} upVote={upVote} />
 
-      {/* Pagination */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-        }}
-      >
-        <nav aria-label="Page navigation example">
-          <ul className="pagination">
-            {/* showLast24Hrs */}
-            <a
-              className="page-link"
-              href="#"
-              style={
-                {
-                  // color: pageNumber > 1?"black":"darkgrey",
-                }
-              }
-              onClick={() => {
-                showPastYear();
-              }}
-            >
-              Sort
-            </a>
-            <li
-              className={`page-item ${pageNumber === 1 ? "disabled" : ""}`}
-              onClick={() => {
-                if (pageNumber > 1) setPageNumber(pageNumber - 1);
-              }}
-            >
-              <a
-                className="page-link"
-                href="#"
-                style={{
-                  color: pageNumber > 1 ? "black" : "darkgrey",
-                }}
-              >
-                Previous
-              </a>
-            </li>
-            <li className="page-item">
-              <a
-                className="page-link"
-                href="#"
-                style={{
-                  color: "black",
-                }}
-              >
-                {pageNumber}
-              </a>
-            </li>
-            <li
-              className="page-item"
-              onClick={() => {
-                setPageNumber(pageNumber + 1);
-              }}
-            >
-              <a
-                className="page-link"
-                href="#"
-                style={{
-                  color: "black",
-                }}
-              >
-                {1 + pageNumber}
-              </a>
-            </li>
-            <li
-              className="page-item"
-              onClick={() => {
-                setPageNumber(pageNumber + 2);
-              }}
-            >
-              <a
-                className="page-link"
-                href="#"
-                style={{
-                  color: "black",
-                }}
-              >
-                {2 + pageNumber}
-              </a>
-            </li>
-            <li
-              className="page-item"
-              onClick={() => {
-                setPageNumber(pageNumber + 1);
-              }}
-            >
-              <a
-                className="page-link "
-                style={{
-                  color: "black",
-                }}
-                href="#"
-              >
-                Next
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      {isSearch ? (
+        <SearchPage setCurStories={setCurStories} setIsSearch={setIsSearch} />
+      ) : (
+        <>
+          <MenuBar setIsSearch={setIsSearch} />
+          {/* <SortingBox/> */}
+          <Feed items={curStories} hideData={hideData} upVote={upVote} />
+
+          {/* Pagination */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <nav aria-label="Page navigation example">
+              <ul className="pagination">
+                <li
+                  className="page-item"
+                  onClick={() => {
+                    setPageNumber(pageNumber + 1);
+                  }}
+                >
+                  <a
+                    className="page-link "
+                    style={{
+                      color: "black",
+                    }}
+                    href="#"
+                  >
+                    More
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </>
+      )}
 
       <Footer />
     </div>

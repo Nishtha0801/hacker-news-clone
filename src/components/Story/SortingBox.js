@@ -1,17 +1,6 @@
 import React, { useState } from "react";
-import { Listbox } from "@headlessui/react";
 
-const people = [
-  { id: 1, name: "Durward Reynolds", unavailable: false },
-  { id: 2, name: "Kenton Towne", unavailable: false },
-  { id: 3, name: "Therese Wunsch", unavailable: false },
-  { id: 4, name: "Benedict Kessler", unavailable: true },
-  { id: 5, name: "Katelyn Rohan", unavailable: false },
-];
-
-const SortingBox = () => {
-  const [selectedPerson, setSelectedPerson] = useState(people[0]);
-
+const SortingBox = ({ timeFilter, setTags, setSortedBy }) => {
   return (
     <div
       style={{
@@ -19,13 +8,14 @@ const SortingBox = () => {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
+        marginTop: "20px",
       }}
     >
       {/* 1st */}
       <div
         className="selectBox"
         style={{
-          display: "flex",
+          // display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
           marginRight: "10px",
@@ -33,7 +23,7 @@ const SortingBox = () => {
       >
         <label
           htmlFor="people"
-          className="  bg-red  text-sm font-medium text-gray-700 p-0 m-0"
+          className="  bg-red  text-sm font-medium text-gray-700 p-0 m-0 mr-2"
         >
           <p
             style={{
@@ -41,21 +31,29 @@ const SortingBox = () => {
               fontWeight: "bold",
             }}
           >
-            Show Only
+            Search
           </p>
         </label>
-        <select className="form-select" aria-label="Default select example">
-          <option value="1" selected>
-            Descending
+        <select
+          className="form-select"
+          aria-label="Default select example"
+          onChange={(e) => {
+            setTags(e.target.value);
+          }}
+        >
+          <option value="" selected>
+            All
           </option>
-          <option value="2">Ascending</option>
+          <option value="story">Story</option>
+          <option value="comment">Comment</option>
+          <option value="poll">Poll</option>
         </select>
       </div>
       {/* 2nd */}
       <div
         className="selectBox"
         style={{
-          display: "flex",
+          // display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
           marginRight: "10px",
@@ -63,7 +61,7 @@ const SortingBox = () => {
       >
         <label
           htmlFor="people"
-          className="  bg-red  text-sm font-medium text-gray-700 p-0 m-0"
+          className="  bg-red  text-sm font-medium text-gray-700 p-0 m-0 mr-2"
         >
           <p
             style={{
@@ -71,14 +69,20 @@ const SortingBox = () => {
               fontWeight: "bold",
             }}
           >
-            Show Only
+            By
           </p>
         </label>
-        <select className="form-select" aria-label="Default select example">
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select
+          className="form-select"
+          aria-label="Default select example"
+          onChange={(e) => {
+            setSortedBy(e.target.value);
+          }}
+        >
+          <option value="search" selected>
+            Popularity
+          </option>
+          <option value="search_by_date">Date</option>
         </select>
       </div>
 
@@ -86,7 +90,7 @@ const SortingBox = () => {
       <div
         className="selectBox"
         style={{
-          display: "flex",
+          // display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
           marginRight: "10px",
@@ -94,7 +98,7 @@ const SortingBox = () => {
       >
         <label
           htmlFor="people"
-          className="  bg-red  text-sm font-medium text-gray-700 p-0 m-0"
+          className="  bg-red  text-sm font-medium text-gray-700 p-0 m-0 mr-2"
         >
           <p
             style={{
@@ -102,14 +106,23 @@ const SortingBox = () => {
               fontWeight: "bold",
             }}
           >
-            Show Only
+            For
           </p>
         </label>
-        <select className="form-select" aria-label="Default select example">
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select
+          className="form-select"
+          aria-label="Default select example"
+          onChange={(e) => {
+            timeFilter(e.target.value);
+          }}
+        >
+          <option value="-1" selected>
+            All time
+          </option>
+
+          <option value="1">Last Day</option>
+          <option value="7">Last week</option>
+          <option value="365">Last Year</option>
         </select>
       </div>
     </div>
