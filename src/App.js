@@ -90,58 +90,58 @@ const App = () => {
 
   useEffect(() => {}, [totalStories]);
 
-  // Show only 1)  Last 24 hrs 2) Past Week 3) Past Month 4) Past Year 5) All Time
+  // // Show only 1)  Last 24 hrs 2) Past Week 3) Past Month 4) Past Year 5) All Time
 
-  const showLast24Hrs = () => {
-    let data_here = curStories;
-    let final_data = [];
-    let i = 0;
-    for (let row of data_here) {
-      let date = new Date(row.created_at);
-      let cur_date = new Date();
-      let diff = cur_date.getTime() - date.getTime();
-      let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-      if (diffDays <= 1) {
-        final_data.push(row);
-        i++;
-      }
-    }
-    setCurStories(final_data);
-  };
+  // const showLast24Hrs = () => {
+  //   let data_here = curStories;
+  //   let final_data = [];
+  //   let i = 0;
+  //   for (let row of data_here) {
+  //     let date = new Date(row.created_at);
+  //     let cur_date = new Date();
+  //     let diff = cur_date.getTime() - date.getTime();
+  //     let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+  //     if (diffDays <= 1) {
+  //       final_data.push(row);
+  //       i++;
+  //     }
+  //   }
+  //   setCurStories(final_data);
+  // };
 
-  const showPastWeek = () => {
-    let data_here = curStories;
-    let final_data = [];
-    let i = 0;
-    for (let row of data_here) {
-      let date = new Date(row.created_at);
-      let cur_date = new Date();
-      let diff = cur_date.getTime() - date.getTime();
-      let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-      if (diffDays <= 7) {
-        final_data.push(row);
-        i++;
-      }
-    }
-    setCurStories(final_data);
-  };
+  // const showPastWeek = () => {
+  //   let data_here = curStories;
+  //   let final_data = [];
+  //   let i = 0;
+  //   for (let row of data_here) {
+  //     let date = new Date(row.created_at);
+  //     let cur_date = new Date();
+  //     let diff = cur_date.getTime() - date.getTime();
+  //     let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+  //     if (diffDays <= 7) {
+  //       final_data.push(row);
+  //       i++;
+  //     }
+  //   }
+  //   setCurStories(final_data);
+  // };
 
-  const showPastYear = () => {
-    let data_here = curStories;
-    let final_data = [];
-    let i = 0;
-    for (let row of data_here) {
-      let date = new Date(row.created_at);
-      let cur_date = new Date();
-      let diff = cur_date.getTime() - date.getTime();
-      let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-      if (diffDays <= 365) {
-        final_data.push(row);
-        i++;
-      }
-    }
-    setCurStories(final_data);
-  };
+  // const showPastYear = () => {
+  //   let data_here = curStories;
+  //   let final_data = [];
+  //   let i = 0;
+  //   for (let row of data_here) {
+  //     let date = new Date(row.created_at);
+  //     let cur_date = new Date();
+  //     let diff = cur_date.getTime() - date.getTime();
+  //     let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+  //     if (diffDays <= 365) {
+  //       final_data.push(row);
+  //       i++;
+  //     }
+  //   }
+  //   setCurStories(final_data);
+  // };
 
   return (
     <div>

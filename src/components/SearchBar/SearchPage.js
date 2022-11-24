@@ -34,39 +34,39 @@ const SearchPage = ({ setCurStories, setIsSearch }) => {
     setFilteredValues(final_data);
   };
 
-  const showPastWeek = () => {
-    let data_here = searchResults;
-    let final_data = [];
-    let i = 0;
-    for (let row of data_here) {
-      let date = new Date(row.created_at);
-      let cur_date = new Date();
-      let diff = cur_date.getTime() - date.getTime();
-      let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-      if (diffDays <= 7) {
-        final_data.push(row);
-        i++;
-      }
-    }
-    setSearchResults(final_data);
-  };
+  // const showPastWeek = () => {
+  //   let data_here = searchResults;
+  //   let final_data = [];
+  //   let i = 0;
+  //   for (let row of data_here) {
+  //     let date = new Date(row.created_at);
+  //     let cur_date = new Date();
+  //     let diff = cur_date.getTime() - date.getTime();
+  //     let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+  //     if (diffDays <= 7) {
+  //       final_data.push(row);
+  //       i++;
+  //     }
+  //   }
+  //   setSearchResults(final_data);
+  // };
 
-  const showPastYear = () => {
-    let data_here = searchResults;
-    let final_data = [];
-    let i = 0;
-    for (let row of data_here) {
-      let date = new Date(row.created_at);
-      let cur_date = new Date();
-      let diff = cur_date.getTime() - date.getTime();
-      let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-      if (diffDays <= 365) {
-        final_data.push(row);
-        i++;
-      }
-    }
-    setSearchResults(final_data);
-  };
+  // const showPastYear = () => {
+  //   let data_here = searchResults;
+  //   let final_data = [];
+  //   let i = 0;
+  //   for (let row of data_here) {
+  //     let date = new Date(row.created_at);
+  //     let cur_date = new Date();
+  //     let diff = cur_date.getTime() - date.getTime();
+  //     let diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+  //     if (diffDays <= 365) {
+  //       final_data.push(row);
+  //       i++;
+  //     }
+  //   }
+  //   setSearchResults(final_data);
+  // };
 
   return (
     <div>
