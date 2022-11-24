@@ -78,8 +78,12 @@ const SearchPage = ({ setCurStories, setIsSearch }) => {
         tags={tags}
         sortedBy={sortedBy}
       />
-      <SortingBox timeFilter={timeFilter} setTags={setTags} setSortedBy={setSortedBy} />
-      <Feed items={filteredValues} hideData={hideData} upVote={upVote} />
+      <SortingBox
+        timeFilter={timeFilter}
+        setTags={setTags}
+        setSortedBy={setSortedBy}
+      />
+      <Feed items={filteredValues} hideData={hideData} upVote={upVote} tags={tags}  />
     </div>
   );
 };

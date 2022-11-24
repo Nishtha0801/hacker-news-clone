@@ -1,20 +1,26 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { MainClass} from "./Styles";
+import { MainClass } from "./Styles";
 import Header from "./Header";
 import Footer from "./Footer";
-
 
 export default class Story extends Component {
   render() {
     const item = this.props.item;
+    const tags = this.props.tags;
 
     return (
-      <MainClass  id={item.id}>
+      <MainClass id={item.id}>
         <Header
           Id={item.id}
           url={item.url}
-          title={item.title}
+          title={
+            tags == "comment"
+              ? item.comment_text
+              : item.title
+              ? item.title
+              : item.story_text
+          }
           curRank={item.id}
           upVote={this.props.upVote}
         />
@@ -32,5 +38,5 @@ export default class Story extends Component {
 }
 
 Story.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
 };

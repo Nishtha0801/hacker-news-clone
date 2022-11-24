@@ -17,6 +17,7 @@ const LoadWrap = styled.div`
 export default class Feed extends Component {
   render() {
     this.items = this.props.items;
+    this.tags = this.props.tags;
 
     if (this.items === undefined || this.items.length === 0) {
       return (
@@ -38,6 +39,7 @@ export default class Feed extends Component {
             item={item}
             hideData={this.props.hideData}
             upVote={this.props.upVote}
+            tags={this.tags}
           />
         ))}
       </ListWrap>
@@ -47,4 +49,5 @@ export default class Feed extends Component {
 
 Feed.propTypes = {
   items: PropTypes.array.isRequired,
+
 };

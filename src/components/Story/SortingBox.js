@@ -46,7 +46,6 @@ const SortingBox = ({ timeFilter, setTags, setSortedBy }) => {
           </option>
           <option value="story">Story</option>
           <option value="comment">Comment</option>
-          <option value="poll">Poll</option>
         </select>
       </div>
       {/* 2nd */}

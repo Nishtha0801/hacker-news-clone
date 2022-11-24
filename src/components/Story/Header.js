@@ -41,9 +41,11 @@ export default function Header(props) {
         </UrlClass>
       </RankClass>
       <TitleClass href={props.url}>
-        {props.title}{" "}
+        {props.title}
         <UrlClass>
-          <HrefClass href={props.url}>({props.url})</HrefClass>
+          {props.url ? (
+            <HrefClass href={props.url}>({props.url})</HrefClass>
+          ) : null}
         </UrlClass>
       </TitleClass>
     </HeaderClass>

@@ -33,50 +33,7 @@ const MOptions = styled(MenuUrlStyle)`
   color: #030303;
 `;
 
-// class SearchMenu extends Component {
-//   state = {
-//     isMenuHidden: true,
-//   };
 
-//   onToggleMenu = () => {
-//     this.setState((prevState, props) => {
-//       return { isMenuHidden: !prevState.isMenuHidden };
-//     });
-//   };
-
-//   render() {
-//     return (
-//       <MainNavClass>
-//         <Logo href="/">
-//           <img
-//             src="https://news.ycombinator.com/y18.gif"
-//             alt="logo"
-//             style={{
-//               border: "1px solid white",
-//               marginRight: "5px",
-//             }}
-//           />
-//           Hacker News
-//         </Logo>
-//         <nav className="navbar navbar-light ">
-//           <div className="container-fluid">
-//             <form className="d-flex">
-//               <input
-//                 className="form-control me-2"
-//                 type="search"
-//                 placeholder="Search"
-//                 aria-label="Search"
-//               />
-//               <button className="btn ml-2" type="submit">
-//                 Search
-//               </button>
-//             </form>
-//           </div>
-//         </nav>
-//       </MainNavClass>
-//     );
-//   }
-// }
 
 const SearchMenu = ({
   setCurStories,
@@ -86,7 +43,7 @@ const SearchMenu = ({
   tags,
   sortedBy,
 }) => {
-  const [searchText, setSearchText] = useState("Nexus");
+  const [searchText, setSearchText] = useState("");
 
   const searchHandler = async (e) => {
     if (e) e.preventDefault();
@@ -104,16 +61,10 @@ const SearchMenu = ({
       i++;
       final_data.push({
         id: i,
-        created_at: row.created_at,
-        title: row.title,
-        url: row.url,
-        author: row.author,
-        points: row.points,
-        story_text: row.story_text,
-        num_comments: row.num_comments,
-        objectID: row.objectID,
+        ...row
       });
     }
+    console.log(final_data);
     setSearchResults(final_data);
     setFilteredValues(final_data);
   };
